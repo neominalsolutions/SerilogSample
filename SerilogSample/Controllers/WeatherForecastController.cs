@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Serilog.Context;
+using SerilogSample.Services;
 
 namespace SerilogSample.Controllers
 {
@@ -6,49 +8,31 @@ namespace SerilogSample.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+       
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly WeatherForecastService _weatherForecastService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, WeatherForecastService weatherForecastService)
         {
             _logger = logger;
+            _weatherForecastService = weatherForecastService;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
-            // 0962ab5a-2202-47a8-88d8-917bbd921d7e
-            //var correlationId = Guid.NewGuid().ToString();
-
-            _logger.LogInformation($"WeatherForecast");
+ 
+                _logger.LogError($"GetWeatherForecast");
 
 
-            try
-            {
-                int number = 10;
-
-                int result = number / 0;
-
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex,ex.Message);
-
-                throw;
-            }
+      
 
 
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return _weatherForecastService.GetWeatherForecasts();
+
+
+
         }
     }
 }

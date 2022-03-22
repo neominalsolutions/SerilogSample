@@ -14,13 +14,7 @@ namespace SerilogSample.Configurations
 
 
             Log.Logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .Enrich.WithMachineName()
-                .Enrich.WithEnvironmentName()
-                .WriteTo.Debug()
-                .WriteTo.Console()
                 .WriteTo.Elasticsearch(ConfigureElasticSinks(configuration, env))
-                .Enrich.WithProperty("Environment", env)
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
         }
@@ -30,7 +24,8 @@ namespace SerilogSample.Configurations
             return new ElasticsearchSinkOptions
             {
                 AutoRegisterTemplate = true,
-                IndexFormat = $"{Assembly.GetExecutingAssembly()?.GetName()?.Name?.ToLower()}-{environment.ToLower()}-{DateTime.UtcNow:'dd-MM-yyyy'}"
+                IndexFormat = $"{Assembly.GetExecutingAssembly()?.GetName()?.Name?.ToLower()}-{environment.ToLower()}",
+               
             };
 
         }
