@@ -19,13 +19,14 @@ namespace SerilogSample.Configurations
                 .CreateLogger();
         }
 
-        private static ElasticsearchSinkOptions ConfigureElasticSinks(IConfigurationRoot configuration,string environment)
+        private static ElasticsearchSinkOptions ConfigureElasticSinks(IConfigurationRoot configuration, string environment)
         {
             return new ElasticsearchSinkOptions
             {
+                
                 AutoRegisterTemplate = true,
                 IndexFormat = $"{Assembly.GetExecutingAssembly()?.GetName()?.Name?.ToLower()}-{environment.ToLower()}",
-               
+
             };
 
         }

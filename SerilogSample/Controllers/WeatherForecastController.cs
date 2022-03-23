@@ -23,7 +23,7 @@ namespace SerilogSample.Controllers
         public IEnumerable<WeatherForecast> Get()
         {
  
-                _logger.LogError($"GetWeatherForecast");
+                _logger.LogError("GetWeatherForecast {userId}", Guid.NewGuid());
 
 
       
