@@ -25,7 +25,7 @@ namespace SerilogSample.Configurations
             {
                 
                 AutoRegisterTemplate = true,
-                IndexFormat = $"{Assembly.GetExecutingAssembly()?.GetName()?.Name?.ToLower()}-{environment.ToLower()}",
+                IndexFormat = $"IsNeTLog",
 
             };
 
