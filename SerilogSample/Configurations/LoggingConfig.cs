@@ -25,7 +25,7 @@ namespace SerilogSample.Configurations
             {
                 
                 AutoRegisterTemplate = true,
-                IndexFormat = $"IsNeTLog",
+                IndexFormat = $"isnet",
 
             };
 
